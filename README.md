@@ -98,7 +98,8 @@ def build_grid_embedding(minutiae, img_shape=(256, 256), G=8):
     return embedding
 ```
 
-Each thumbprint’s minutiae are aggregated into a consistent vector of length $2 \times G^2$. We loop over the $G$ rows and $G$ columns of an imaginary grid on the image. For each cell, we count how many minutiae end up there, then compute the average orientation by summing $\sin(\theta)$ and $\cos(\theta)$ over those cell‐minutiae and taking $\operatorname{atan2}$. That average orientation becomes a second component. Once we have one count and one orientation per cell (total of $G^2$ cells), we normalize the counts so that they sum to 1. The final embedding is $\bigl[\,\text{normalized\_counts}\;\|\;\text{orientations}\bigr]$, a length-$2\,G^2$ vector.
+Each thumbprint’s minutiae are aggregated into a consistent vector of length $2 \times G^2$. We loop over the $G$ rows and $G$ columns of an imaginary grid on the image. For each cell, we count how many minutiae end up there, then compute the average orientation by summing $\sin(\theta)$ and $\cos(\theta)$ over those cell‐minutiae and taking $\mathrm{atan2}(y, x)$
+. That average orientation becomes a second component. Once we have one count and one orientation per cell (total of $G^2$ cells), we normalize the counts so that they sum to 1. The final embedding is $\bigl[\,\text{normalized\_counts}\;\|\;\text{orientations}\bigr]$, a length-$2\,G^2$ vector.
 
 #### d. Simulating Distances to $K$ Bundle Centroids
 
